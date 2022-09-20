@@ -13,11 +13,11 @@ trait HasApiTokens
 
     public function createAuthToken(string $name,  DateTimeInterface $expiresAt = null, array $abilities = [])
     {
-        return $this->createToken($name, array_merge($abilities, ['auth']),$expiresAt ?? now()->addMinutes(config('sanctum-refresh-token.auth_token_expiration')));
+        return $this->createToken($name, array_merge($abilities, ['auth']), $expiresAt ?? now()->addMinutes(config('sanctum-refresh-token.auth_token_expiration')));
     }
 
-    public function createRefreshToken(string $name, DateTimeInterface $expiresAt = null)
+    public function createRefreshToken(string $name, DateTimeInterface $expiresAt = null, array $abilities = [])
     {
-        return $this->createToken($name, ['refresh'],$expiresAt ?? now()->addMinutes(config('sanctum-refresh-token.refresh_token_expiration')));
+        return $this->createToken($name, array_merge($abilities, ['refresh']), $expiresAt ?? now()->addMinutes(config('sanctum-refresh-token.refresh_token_expiration')));
     }
 }
